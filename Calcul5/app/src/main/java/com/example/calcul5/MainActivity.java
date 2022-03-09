@@ -227,8 +227,17 @@ public class MainActivity extends AppCompatActivity {
         btnEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 tvAllOp.setText(tvAllOp.getText()+""+tvOp.getText());
                 operands.add(tvOp.getText().toString());
+                if(operands.size()>=3) {
+                    for (int i = 0; i <= operands.size() - 2; i++) {//0123456
+                        if (operands.get(i) == "/" && operands.get(i + 1) == "0"){
+                            btnAC.callOnClick();
+                            return;
+                        }
+                    }
+                }
                 if(operands.size()>=3){
                     for (int i=0;i<=operands.size()-3;i++) {
                         if(operands.get(i+1)=="*" && operands.size()>=3){
@@ -281,8 +290,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-                tvAllOp.setText(operands.get(0));
-                tvOp.setText("");
+                tvAllOp.setText("");
+                tvOp.setText(operands.get(0));
+                operands=new ArrayList<>();
             }
         });
 
