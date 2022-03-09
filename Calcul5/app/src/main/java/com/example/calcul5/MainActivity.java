@@ -1,5 +1,6 @@
 package com.example.calcul5;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,17 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private List<String> operands=new ArrayList<>();
+    private ArrayList<String> operands=new ArrayList<>();
     private String operation ="";
     private int result=0;
+    private Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPlus,btnMinus,btnDiv,btnMult,btnAC,btnEqual;
+    private TextView tvOp,tvAllOp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Toast.makeText(Context, "Hello!!", Toast.LENGTH_SHORT).show();
 
-        Button btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPlus,btnMinus,btnDiv,btnMult,btnAC,btnEqual;
-        TextView tvOp,tvAllOp;
         btn0=(Button)findViewById(R.id.btn0);
         btn1=(Button)findViewById(R.id.btn1);
         btn2=(Button)findViewById(R.id.btn2);
@@ -297,6 +298,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString("tvOp",tvOp.getText().toString());
+        outState.putString("tvAllOp",tvAllOp.getText().toString());
+        outState.putString("operation",operation);
+        outState.putStringArrayList("operands",operands);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        tvOp.setText(savedInstanceState.getString("tvOp"));
+        tvAllOp.setText(savedInstanceState.getString("tvAllOp"));
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     public static void showAll(List<String> list){
         System.out.println("*********************************");
         for (String s:list) {
