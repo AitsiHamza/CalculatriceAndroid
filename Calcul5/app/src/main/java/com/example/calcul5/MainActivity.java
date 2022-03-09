@@ -228,24 +228,69 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tvAllOp.setText(tvAllOp.getText()+""+tvOp.getText());
-                /*if(operands[0]!="" && operands[1]!=""){
-                    if(operation=="+")
-                        result=Integer.valueOf(operands[0])+Integer.valueOf(operands[1]);
-                    else if(operation=="/" && operands[1]!="0")
-                        result=Integer.valueOf(operands[0])/Integer.valueOf(operands[1]);
-                    else if(operation=="/" && operands[1]=="0"){
-                        tvAllOp.setText("");
-                        tvOp.setText("");
-                        return;
+                operands.add(tvOp.getText().toString());
+                if(operands.size()>=3){
+                    for (int i=0;i<=operands.size()-3;i++) {
+                        if(operands.get(i+1)=="*" && operands.size()>=3){
+                            operands.add(i, String.valueOf(
+                                    Integer.valueOf(operands.get(i))*Integer.valueOf(operands.get(i+2))
+                            ));
+                            //showAll(operands);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            i=i-2;
+                        }
                     }
-                    else if(operation=="-")
-                        result=Integer.valueOf(operands[0])-Integer.valueOf(operands[1]);
-                    else if(operation=="*")
-                        result=Integer.valueOf(operands[0])*Integer.valueOf(operands[1]);
-                    tvAllOp.setText(String.valueOf(result));
-                }*/
+                    for (int i=0;i<=operands.size()-3;i++) {
+                        if(operands.get(i+1)=="/" && operands.size()>=3){
+                            operands.add(i, String.valueOf(
+                                    Integer.valueOf(operands.get(i))/Integer.valueOf(operands.get(i+2))
+                            ));
+                            //showAll(operands);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            i=i-2;
+                        }
+                    }
+                }
+                if(operands.size()>=3){
+                    for (int i=0;i<=operands.size()-3;i++) {
+                        if(operands.get(i+1)=="+" && operands.size()>=3){
+                            operands.add(i, String.valueOf(
+                                    Integer.valueOf(operands.get(i))+Integer.valueOf(operands.get(i+2))
+                            ));
+                            //showAll(operands);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            i=i-2;
+                        }
+                    }
+                    for (int i=0;i<=operands.size()-3;i++) {
+                        if(operands.get(i+1)=="-" && operands.size()>=3){
+                            operands.add(i, String.valueOf(
+                                    Integer.valueOf(operands.get(i))-Integer.valueOf(operands.get(i+2))
+                            ));
+                            //showAll(operands);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            operands.remove(i+1);
+                            i=i-2;
+                        }
+                    }
+                }
+                tvAllOp.setText(operands.get(0));
+                tvOp.setText("");
             }
         });
 
+    }
+    public static void showAll(List<String> list){
+        System.out.println("*********************************");
+        for (String s:list) {
+            System.out.println(s);
+        }
     }
 }
