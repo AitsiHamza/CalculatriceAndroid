@@ -230,7 +230,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 tvAllOp.setText(tvAllOp.getText()+""+tvOp.getText());
-                operands.add(tvOp.getText().toString());
+                if(tvOp.getText()!=""){
+                    operands.add(tvOp.getText().toString());
+                }else{
+                    /**there is a problem if you click the button = and tvOp is empty*/
+                    //operands.remove(operands.size()-1);
+                    //tvAllOp.setText(());()tvAllOp.getText()
+                }
                 if(operands.size()>=3) {
                     for (int i = 0; i <= operands.size() - 2; i++) {//0123456
                         if (operands.get(i) == "/" && operands.get(i + 1) == "0"){
